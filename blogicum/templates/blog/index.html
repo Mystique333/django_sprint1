@@ -5,25 +5,25 @@
 {% block content %}
   <h1>Лента записей</h1>                        
   <!-- Перебираем в цикле все посты -->
-  {% for post in posts %}
+  {% for some_post in posts reversed %}
     <hr>
     <article>
       <ul>
         <li>
-          Место: {{ post.location }}
+          Место: {{ some_post.location }}
         </li>
         <li>
-          Дата: {{ post.date }}
+          Дата: {{ some_post.date }}
         </li>
         <li>
-          Категория: <a href={{ post.category }}>{{ post.category }}</a>
+          Категория: <a href="{% url 'blog:category_posts' some_post.category %}">{{ some_post.category }}</a>
         </li>
       </ul>
       <!-- Первые 10 слов -->
       <p>
-        {{ post.text|truncatewords:10 }}
+        {{ some_post.text|truncatewords:10 }}
       </p>
-      <a href="{% url 'blog:post_detail' posts.id %}">Читать полный текст</a> 
+      <a href="{% url 'blog:post_detail' some_post.id %}">Читать полный текст</a> 
     </article>
     <hr>
   {% endfor %}
