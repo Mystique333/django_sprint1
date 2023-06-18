@@ -51,20 +51,13 @@ def index(request):
     return render(request, template, context)
 
 
-def post_detail(request, id):
+def post_detail(request, post_id):
     template = 'blog/detail.html'
-    if id >= len(posts):
-        raise Http404("Post with this ID does not exist")
-    context = {'post': posts[id]}
-    return render(request, template, context)
-    """
     try:
-        context = {'post': posts[id]}
+        context = {'post': posts[post_id]}
     except IndexError:
         raise Http404("Post with this ID does not exist")
-    except BaseException as err:
-        raise Http404("Something went wrong. " + str(err))
-    """
+    return render(request, template, context)
 
 
 def category_posts(request, category_slug):
